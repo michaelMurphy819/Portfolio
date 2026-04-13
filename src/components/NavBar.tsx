@@ -1,38 +1,39 @@
 'use client'
-
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 const links = [
-  { href: '/',           label: '~/home' },
-  { href: '/projects',   label: '~/projects' },
-  { href: '/research',   label: '~/research' },
-  { href: '/about',      label: '~/about' },
+  { href: '/',           label: 'Home' },
+  { href: '/projects',   label: 'Projects' },
+  { href: '/research',   label: 'Research' },
+  { href: '/about',      label: 'About' },
 ]
 
 export function NavBar() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 10)
+    const handler = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handler)
     return () => window.removeEventListener('scroll', handler)
   }, [])
 
   return (
-    <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-      scrolled ? 'border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-md' : 'bg-transparent'
-    }`}>
-      <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <Link href="/" className="font-mono text-sm font-semibold text-zinc-100 hover:text-white">
-          <span className="text-green-500">❯</span> michael murphy
+    <nav className={`fixed top-6 inset-x-0 z-50 transition-all duration-500`}>
+      <div className={`mx-auto flex max-w-2xl items-center justify-between px-6 py-3 rounded-full border transition-all ${
+        scrolled 
+          ? 'glass-panel border-white/10 shadow-2xl shadow-black/50' 
+          : 'border-white/5 bg-white/5 backdrop-blur-md'
+      }`}>
+        <Link href="/" className="text-sm font-bold tracking-tighter text-white">
+          MM<span className="text-sky-500">.</span>
         </Link>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-8">
           {links.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
-              className="font-mono text-xs text-zinc-400 transition-colors hover:text-zinc-100"
+              className="text-xs font-semibold text-zinc-300 transition-colors hover:text-white"
             >
               {label}
             </Link>

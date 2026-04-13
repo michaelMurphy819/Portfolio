@@ -14,17 +14,18 @@ export default async function ProjectsPage() {
   const projects: Project[] = data ?? []
 
   return (
-    <main className="mx-auto max-w-5xl px-6 pt-32 pb-20">
-      <p className="font-mono text-sm text-green-500 mb-4">❯ ls ./projects</p>
-      <h1 className="text-4xl font-bold text-zinc-100 mb-2">Projects</h1>
-      <p className="font-mono text-sm text-zinc-500 mb-12">
-        {projects.length} projects found
-      </p>
+    <main className="mx-auto max-w-6xl px-6 pt-32 pb-20">
+      <div className="mb-14">
+        <h1 className="text-5xl font-bold tracking-tighter text-white mb-4">Projects</h1>
+        <p className="text-lg text-zinc-400 font-medium max-w-2xl">
+          Showcasing {projects.length} deep dive{projects.length !== 1 ? 's' : ''} into systems engineering and development.
+        </p>
+      </div>
 
       {error && (
-        <p className="font-mono text-sm text-red-400">
+        <div className="glass-panel text-red-400 p-6 rounded-2xl mb-12 border border-red-500/20 bg-red-500/5 font-semibold">
           Error loading projects: {error.message}
-        </p>
+        </div>
       )}
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

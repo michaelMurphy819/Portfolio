@@ -1,3 +1,30 @@
 @import "tailwindcss";
 
-@variant dark (&:where(.dark, .dark *));
+@theme {
+  --color-glass: rgba(255, 255, 255, 0.02);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-villanova-blue: #003366;
+  --color-villanova-sky: #13B5EA;
+}
+
+:root {
+  /* Deep Navy background for that premium feel */
+  --background: #000814; 
+  --foreground: #f0f4f8;
+}
+
+body {
+  background-color: var(--background);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(19, 181, 234, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(0, 51, 102, 0.15) 0px, transparent 60%);
+  background-attachment: fixed;
+  color: var(--foreground);
+}
+
+.glass-panel {
+  background: var(--color-glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--color-glass-border);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+}

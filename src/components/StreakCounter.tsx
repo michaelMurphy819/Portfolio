@@ -46,24 +46,25 @@ export function StreakCounter() {
     fetchStreak();
   }, []);
 
+  if (streak === null && totalDays === 0) return null; // Don't show while loading
+
   return (
-    <div className="flex items-center gap-6 rounded-xl border border-zinc-800 bg-zinc-900/50 px-6 py-4">
-      <div className="flex items-center gap-2">
-        <Flame
-          size={28}
-          className={streak && streak > 0 ? 'text-orange-400' : 'text-zinc-600'}
-        />
-        <div>
-          <p className="font-mono text-3xl font-bold text-zinc-100">
-            {streak === null ? '—' : streak}
-          </p>
-          <p className="font-mono text-xs text-zinc-500">day streak</p>
+    <div className="glass-panel inline-flex items-center gap-5 rounded-full px-6 py-3 shadow-[0_0_30px_-5px_rgba(19,181,234,0.15)] group hover:border-white/20 transition-all duration-300">
+      <div className="flex items-center gap-3">
+        <div className={`p-1.5 rounded-full ${streak && streak > 0 ? 'bg-orange-500/20 text-orange-400' : 'bg-zinc-500/20 text-zinc-400'}`}>
+          <Flame size={18} className={streak && streak > 0 ? 'drop-shadow-[0_0_8px_rgba(249,115,22,0.8)]' : ''} />
+        </div>
+        <div className="flex flex-col">
+          <span className="text-base font-bold text-white leading-none">{streak ?? 0}</span>
+          <span className="text-[11px] font-semibold tracking-wider text-zinc-500 uppercase mt-0.5">Day Streak</span>
         </div>
       </div>
-      <div className="h-10 w-px bg-zinc-800" />
-      <div>
-        <p className="font-mono text-3xl font-bold text-zinc-100">{totalDays}</p>
-        <p className="font-mono text-xs text-zinc-500">total active days</p>
+      
+      <div className="h-8 w-px bg-white/10" />
+      
+      <div className="flex flex-col">
+        <span className="text-base font-bold text-white leading-none">{totalDays}</span>
+        <span className="text-[11px] font-semibold tracking-wider text-zinc-500 uppercase mt-0.5">Total Days</span>
       </div>
     </div>
   );

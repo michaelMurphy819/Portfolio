@@ -3,17 +3,7 @@ import { Project } from '@/lib/types';
 import Link from 'next/link';
 import { ArrowLeft, Github, ExternalLink } from 'lucide-react';
 import { notFound } from 'next/navigation';
-import { TerminalFooter } from '@/components/TerminalFooter';
-
-const techColors: Record<string, string> = {
-  C: 'bg-blue-950 text-blue-300 border-blue-800',
-  Rust: 'bg-orange-950 text-orange-300 border-orange-800',
-  TypeScript: 'bg-sky-950 text-sky-300 border-sky-800',
-  'Next.js': 'bg-zinc-800 text-zinc-200 border-zinc-600',
-  Python: 'bg-yellow-950 text-yellow-300 border-yellow-800',
-  Unix: 'bg-green-950 text-green-300 border-green-800',
-};
-const defaultBadge = 'bg-zinc-800 text-zinc-300 border-zinc-600';
+import { Footer } from '@/components/Footer';
 
 export default async function ProjectDetailPage({
   params,
@@ -31,34 +21,26 @@ export default async function ProjectDetailPage({
   if (!data) notFound();
   const project = data as Project;
 
-  const slug = project.title.toLowerCase().replace(/\s+/g, '-');
-
   return (
     <div className="flex min-h-screen flex-col">
-      <main className="mx-auto w-full max-w-3xl flex-1 px-6 pt-32 pb-20">
+      <main className="mx-auto w-full max-w-4xl flex-1 px-6 pt-32 pb-20">
         <Link
           href="/projects"
-          className="mb-10 flex items-center gap-2 font-mono text-xs text-zinc-500 transition-colors hover:text-zinc-100"
+          className="mb-10 inline-flex items-center gap-2 text-sm font-semibold text-zinc-400 transition-colors hover:text-white"
         >
-          <ArrowLeft size={14} /> back to projects
+          <ArrowLeft size={16} /> Back to Projects
         </Link>
 
-        <p className="font-mono text-sm text-green-500 mb-4">
-          ❯ cat ./projects/{slug}.md
-        </p>
-
-        <h1 className="text-4xl font-bold text-zinc-100 tracking-tight mb-6">
+        <h1 className="text-5xl font-bold tracking-tighter text-white mb-8">
           {project.title}
         </h1>
 
         {/* Tech badges */}
-        <div className="mb-10 flex flex-wrap gap-2">
+        <div className="mb-12 flex flex-wrap gap-2">
           {project.tech_stack.map((tech) => (
             <span
               key={tech}
-              className={`inline-flex items-center rounded-md border px-2.5 py-1 font-mono text-xs ${
-                techColors[tech] ?? defaultBadge
-              }`}
+              className="px-3 py-1.5 text-xs font-semibold bg-white/5 border border-white/10 rounded-full text-zinc-300 shadow-sm backdrop-blur-md"
             >
               {tech}
             </span>
@@ -66,39 +48,43 @@ export default async function ProjectDetailPage({
         </div>
 
         {/* Content card */}
-        <div className="mb-8 flex flex-col gap-6 rounded-xl border border-zinc-800 bg-zinc-900/50 p-6">
-          <div>
-            <p className="mb-2 font-mono text-xs text-green-500">problem:</p>
-            <p className="leading-relaxed text-zinc-300">{project.problem}</p>
-          </div>
-          <div className="h-px bg-zinc-800" />
-          <div>
-            <p className="mb-2 font-mono text-xs text-sky-400">solution:</p>
-            <p className="leading-relaxed text-zinc-300">{project.solution}</p>
-          </div>
+        <div className="glass-panel mb-12 flex flex-col gap-8 rounded-3xl p-8 sm:p-12 shadow-xl">
+          <section>
+            <h2 className="mb-4 text-xl font-bold tracking-tight text-[#13B5EA]">Problem</h2>
+            <p className="leading-relaxed text-zinc-300 text-lg">{project.problem}</p>
+          </section>
+          
+          <div className="h-px bg-white/10" />
+          
+          <section>
+            <h2 className="mb-4 text-xl font-bold tracking-tight text-white">Solution</h2>
+            <p className="leading-relaxed text-zinc-300 text-lg">{project.solution}</p>
+          </section>
+
           {project.description && (
             <>
-              <div className="h-px bg-zinc-800" />
-              <div>
-                <p className="mb-2 font-mono text-xs text-amber-400">details:</p>
-                <p className="leading-relaxed text-zinc-300">{project.description}</p>
-              </div>
+              <div className="h-px bg-white/10" />
+              <section>
+                <h2 className="mb-4 text-xl font-bold tracking-tight text-white">Details</h2>
+                <p className="leading-relaxed text-zinc-300 text-lg">{project.description}</p>
+              </section>
             </>
           )}
+
           {project.highlights && project.highlights.length > 0 && (
             <>
-              <div className="h-px bg-zinc-800" />
-              <div>
-                <p className="mb-3 font-mono text-xs text-purple-400">highlights:</p>
-                <ul className="flex flex-col gap-2">
+              <div className="h-px bg-white/10" />
+              <section>
+                <h2 className="mb-4 text-xl font-bold tracking-tight text-white">Key Highlights</h2>
+                <ul className="flex flex-col gap-3">
                   {project.highlights.map((h, i) => (
-                    <li key={i} className="flex gap-2 font-mono text-xs text-zinc-400">
-                      <span className="text-zinc-600">—</span>
+                    <li key={i} className="flex gap-3 text-lg text-zinc-300 font-medium">
+                      <span className="text-[#13B5EA] font-black">•</span>
                       {h}
                     </li>
                   ))}
                 </ul>
-              </div>
+              </section>
             </>
           )}
         </div>
@@ -110,9 +96,9 @@ export default async function ProjectDetailPage({
               href={project.github_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900/50 px-4 py-2.5 font-mono text-sm text-zinc-300 transition-all hover:border-zinc-600 hover:text-zinc-100"
+              className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-white/10 hover:scale-[1.02] shadow-sm"
             >
-              <Github size={16} /> view source
+              <Github size={18} /> Source Code
             </a>
           )}
           {project.live_url && (
@@ -120,14 +106,14 @@ export default async function ProjectDetailPage({
               href={project.live_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-lg bg-zinc-100 px-4 py-2.5 font-mono text-sm font-semibold text-zinc-900 transition-colors hover:bg-white"
+              className="flex items-center gap-2 rounded-full border border-white/20 bg-white text-[#000814] px-6 py-3 text-sm font-bold transition-all hover:bg-zinc-200 hover:scale-[1.02] shadow-lg"
             >
-              <ExternalLink size={16} /> live demo
+              <ExternalLink size={18} /> Live Demo
             </a>
           )}
         </div>
       </main>
-      <TerminalFooter />
+      <Footer />
     </div>
   );
 }

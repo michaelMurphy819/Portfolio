@@ -1,22 +1,23 @@
 import { ContactForm } from '@/components/ContactForm';
-import { TerminalFooter } from '@/components/TerminalFooter';
+import { Footer } from '@/components/Footer';
 import { Mail } from 'lucide-react';
 
 export default function ContactPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <main className="mx-auto w-full max-w-2xl flex-1 px-6 pt-32 pb-20">
-        <p className="font-mono text-sm text-green-500 mb-4">❯ ./contact --new</p>
-        <h1 className="text-4xl font-bold text-zinc-100 tracking-tight mb-2">Get in touch</h1>
-        <p className="font-mono text-sm text-zinc-500 mb-12">
-          open to opportunities, collaborations, and interesting conversations.
-        </p>
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold tracking-tighter text-white mb-4">Get in touch</h1>
+          <p className="text-lg text-zinc-400 font-medium">
+            Open to opportunities, collaborations, and interesting conversations.
+          </p>
+        </div>
 
-        <div className="mb-8 flex items-center gap-3 rounded-xl border border-zinc-800 bg-zinc-900/50 px-5 py-4">
-          <Mail size={16} className="text-zinc-500" />
+        <div className="glass-panel mb-8 flex items-center justify-center gap-4 rounded-2xl px-6 py-5 hover:border-white/20 transition-all shadow-lg shadow-[#003366]/10">
+          <Mail size={20} className="text-[#13B5EA]" />
           <a
-            href="mailto:michaelmurphy819@gmail.com"
-            className="font-mono text-sm text-zinc-400 transition-colors hover:text-zinc-100"
+            href="mailto:mikeymurph2005@yahoo.com"
+            className="text-base font-bold tracking-tight text-white transition-colors hover:text-[#13B5EA]"
           >
             mikeymurph2005@yahoo.com
           </a>
@@ -24,7 +25,7 @@ export default function ContactPage() {
 
         <ContactForm />
       </main>
-      <TerminalFooter />
+      <Footer />
     </div>
   );
 }
