@@ -13,7 +13,7 @@ export function Footer() {
         
         <div className="flex gap-8">
           <a href="https://github.com/michaelMurphy819" className="text-xs font-semibold text-zinc-400 hover:text-white transition-colors">GitHub</a>
-          <a href="#" className="text-xs font-semibold text-zinc-400 hover:text-white transition-colors">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/michael-murphy-12a594222" className="text-xs font-semibold text-zinc-400 hover:text-white transition-colors">LinkedIn</a>
           <Link href="/contact" className="text-xs font-semibold text-zinc-400 hover:text-white transition-colors">Contact</Link>
         </div>
 

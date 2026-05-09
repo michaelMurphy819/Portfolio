@@ -7,7 +7,7 @@ export default function Home() {
     <div className="relative flex min-h-screen flex-col overflow-hidden">
       {/* Villanova Blue accent glow */}
       <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] bg-[#003366]/20 blur-[150px] rounded-full" />
-      
+
       <main className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 text-center mx-auto w-full max-w-4xl">
         <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#13B5EA]/20 bg-[#13B5EA]/5 px-4 py-1.5 text-[10px] uppercase tracking-widest font-bold text-[#13B5EA] backdrop-blur-md">
           <span className="relative flex h-2 w-2">
@@ -17,7 +17,7 @@ export default function Home() {
           Computer Science @ Villanova
         </div>
 
-        <h1 className="text-6xl sm:text-8xl font-bold tracking-tighter text-white mb-6 leading-tight">
+        <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tighter text-white mb-6 leading-tight">
           Michael <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-[#13B5EA]">
             Murphy
@@ -25,7 +25,7 @@ export default function Home() {
         </h1>
 
         <p className="text-lg text-zinc-400 max-w-2xl mb-12 leading-relaxed font-light">
-          Engineering high-performance systems and low-level infrastructure with the precision of a 
+          Engineering high-performance systems and low-level infrastructure with the precision of a
           <span className="text-white font-medium"> Wildcat</span>.
         </p>
 
@@ -34,11 +34,11 @@ export default function Home() {
             View My Work
           </Link>
           <Link href="/contact" className="h-14 px-10 flex items-center justify-center rounded-full glass-panel text-white font-semibold transition-all hover:bg-white/5 border border-white/10 hover:border-white/20 hover:shadow-[0_0_20px_rgba(19,181,234,0.15)]">
-            Get in touch
+            Contact Me
           </Link>
         </div>
       </main>
-      
+
       {/* Minimal Streak Counter position */}
       <div className="absolute bottom-12 left-12 hidden xl:block">
         <StreakCounter />

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { NavBar } from '@/components/NavBar'
+import NextTopLoader from 'nextjs-toploader'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -16,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable} dark`}>
       <body className="antialiased font-sans">
+        <NextTopLoader color="#13B5EA" showSpinner={false} shadow="0 0 10px #13B5EA,0 0 5px #13B5EA" />
         <NavBar />
         {children}
       </body>
