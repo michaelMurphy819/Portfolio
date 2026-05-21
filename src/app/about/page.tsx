@@ -3,16 +3,7 @@ import { Footer } from '@/components/Footer'
 import { Briefcase } from 'lucide-react'
 
 const experiences = [
-  {
-    role: 'Machine Learning Research Intern',
-    company: 'Villanova University',
-    date: 'May 2026 - Aug 2026',
-    bullets: [
-      'Interviewed 15+ AI startup founders to help fix AI drifting in their models.',
-      'Implemented Reinforcement Learning algorithms in Python to improve AI performance.',
-      'Co-Authored a research paper on the effectiveness of my research and script.'
-    ]
-  },
+
   {
     role: 'Software Development Club',
     company: 'Villanova University',
