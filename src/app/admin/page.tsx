@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { addProject, updateProject, deleteProject } from '@/app/admin/actions'
 import { Project } from '@/lib/types'
@@ -25,14 +25,16 @@ export default function AdminPage() {
   const router = useRouter()
   const supabase = createClient()
 
-  async function fetchProjects() {
+  const fetchProjects = useCallback(async () => {
     setLoading(true)
     const { data } = await supabase.from('projects').select('*').order('sort_order', { ascending: true })
     setProjects(data ?? [])
     setLoading(false)
-  }
+  }, [supabase])
 
-  useEffect(() => { fetchProjects() }, [])
+  useEffect(() => {
+    fetchProjects()
+  }, [fetchProjects])
 
   function flash(msg: string) {
     setSuccessMsg(msg)

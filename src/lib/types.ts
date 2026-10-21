@@ -1,6 +1,11 @@
 export interface Project {
   id: string;
+  slug?: string;
   title: string;
+  tagline?: string;
+  category?: 'ios' | 'fullstack' | 'systems' | 'ai';
+  status?: string;
+  featured?: boolean;
   problem: string;
   solution: string;
   description?: string;    // longer freeform write-up
@@ -10,6 +15,9 @@ export interface Project {
   live_url?: string;
   sort_order?: number;
   created_at: string;
+  stats?: { label: string; value: string }[];
+  architecture?: string;
+  supabase_id?: string;
 }
 
 export interface Streak {

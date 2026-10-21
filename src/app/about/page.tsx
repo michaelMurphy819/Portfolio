@@ -1,171 +1,216 @@
-import Image from 'next/image'
-import { Footer } from '@/components/Footer'
-import { Briefcase } from 'lucide-react'
+import Image from 'next/image';
+import Link from 'next/link';
+import {
+  GraduationCap,
+  Cpu,
+  Layers,
+  Sparkles,
+  Smartphone,
+  CheckCircle2,
+  MapPin,
+  ArrowLeft,
+} from 'lucide-react';
+import { Metadata } from 'next';
 
-const experiences = [
+export const metadata: Metadata = {
+  title: 'About — Michael Murphy',
+  description:
+    'About Michael Murphy — Computer Science student and Vice President of the Software Development Club at Villanova University.',
+};
 
+const EXPERIENCES = [
   {
-    role: 'Software Development Club',
-    company: 'Villanova University',
-    date: 'Sept 2024 - Present',
+    role: 'Vice President & Lead Developer',
+    organization: 'Software Development Club @ Villanova University',
+    location: 'Villanova, PA',
+    period: 'Sept 2024 — Present',
+    badge: 'Leadership',
+    description:
+      'Serving as Vice President (2026–2027). Organizing technical workshops and leading student development teams building software for university departments.',
     bullets: [
-      'Collaborated on various software development projects with other students.',
-      'Developed new technical skills and improved existing ones.',
-      'Serving as Vice President of the club (2026-2027)',
+      'Orchestrated technical workshops on systems architecture, Git workflows, and modern web frameworks.',
+      'Directed development sprints coordinating frontend, backend, and database schema design.',
+      'Mentored underclassmen in technical interview prep, algorithms, and open-source practices.',
+    ],
+  },
+  {
+    role: 'International Research Scholar',
+    organization: 'Universidad Complutense de Madrid / IES Abroad',
+    location: 'Madrid, Spain',
+    period: '2025',
+    badge: 'Research',
+    description:
+      'Completed academic and research program in Madrid, authoring a 17-page formal empirical machine learning paper on NVIDIA stock direction prediction against the Efficient Market Hypothesis.',
+    bullets: [
+      'Engineered 20+ quantitative technical indicators across multi-year OHLCV data.',
+      'Benchmarked 6 classifiers (Random Forest, SVM, Logistic Regression, KNN, Naive Bayes, Decision Trees).',
+    ],
+  },
+  {
+    role: 'B.S. in Computer Science',
+    organization: 'Villanova University',
+    location: 'Villanova, PA',
+    period: '2023 — 2027 (Expected)',
+    badge: 'Education',
+    description:
+      'Coursework: Computer Systems Architecture, Operating Systems, Analysis of Algorithms, Database Systems, Platform-Based Computing, Machine Learning.',
+    bullets: [
+      'Active engineering community leader and technology advocate on campus.',
+    ],
+  },
+];
 
-    ]
-  }
-]
-
-const interests = [
+const SKILL_PILLARS = [
   {
-    label: 'Systems & Infrastructure',
-    color: 'text-[#13B5EA]',
-    border: 'border-[#13B5EA]/20',
-    bg: 'bg-[#13B5EA]/5',
-    items: [
-      'Computer Systems Architecture',
-      'Database Systems (SQL & Schema Design)',
-      'Unix/Linux Internals & Shell Scripting',
-      'Memory Management & C Programming',
-      'Platform Based Computing',
-      'Multi-threaded Programming',
-      'File Systems & I/O'
-    ],
+    title: 'iOS & Mobile Systems',
+    icon: Smartphone,
+    color: 'text-[#0071E3]',
+    skills: ['Swift & SwiftUI (iOS 17+)', 'HealthKit Biometrics', 'CoreBluetooth & BLE', 'CoreLocation', 'Clean MVVM', 'Combine', 'AVFoundation', 'Offline Disk Queue'],
   },
   {
-    label: 'Software Engineering',
-    color: 'text-purple-400',
-    border: 'border-purple-500/20',
-    bg: 'bg-purple-500/5',
-    items: [
-      'Computing for Social Good',
-      'Professional Computer Ethics',
-      'Software Development Club',
-      'Version Control (Git/GitHub)',
-      'System Testing & QA'
-    ],
+    title: 'Full-Stack & Web',
+    icon: Layers,
+    color: 'text-emerald-700',
+    skills: ['TypeScript', 'React 19 & Next.js 16', 'PostgreSQL', 'Drizzle ORM', 'Tailwind CSS v4', 'TanStack Query', 'Firebase & Supabase', 'RESTful APIs'],
   },
   {
-    label: 'Algorithms & Data Science',
-    color: 'text-amber-400',
-    border: 'border-amber-500/20',
-    bg: 'bg-amber-500/5',
-    items: [
-      'Analysis of Algorithms',
-      'Statistical Computing',
-      'Asymptotic Analysis (Big O)',
-      'Data Structures',
-      'Dynamic Programming',
-      'Discrete Mathematics'
-    ],
+    title: 'Systems & Infrastructure',
+    icon: Cpu,
+    color: 'text-purple-700',
+    skills: ['C Programming', 'Unix/Linux System Internals', 'POSIX Shell Scripting', 'Memory Management', 'Concurrency & Threads', 'File Systems & I/O'],
   },
   {
-    label: 'Artificial Intelligence',
-    color: 'text-red-400',
-    border: 'border-red-500/20',
-    bg: 'bg-red-500/5',
-    items: [
-      'Machine Learning',
-      'Neural Networks',
-      'Agentic AI'
-    ],
-  }
-]
+    title: 'Machine Learning',
+    icon: Sparkles,
+    color: 'text-amber-700',
+    skills: ['Python (NumPy, Pandas)', 'Scikit-learn Classifiers', 'Feature Engineering', 'ROC-AUC & F1 Evaluation', 'Random Forest & SVM', 'Neural TTS'],
+  },
+];
 
 export default function AboutPage() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <main className="mx-auto max-w-5xl px-6 pt-32 pb-20 w-full flex-1">
-        <h1 className="text-5xl font-bold tracking-tighter text-white mb-12">About</h1>
-        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-10 mb-20">
-          <Image
-            src="/michael.jpg"
-            alt="Michael Murphy"
-            width={180}
-            height={180}
-            className="rounded-2xl shadow-xl shadow-[#003366]/30 border border-white/10 object-cover"
-            priority
-          />
-          <p className="text-lg text-zinc-400 max-w-2xl leading-relaxed text-center sm:text-left font-medium">
-            I am Michael Murphy, a Computer Science student at Villanova University.
-            I am passionate about building software that is not only efficient and robust but
-            also has a positive impact on society. I have a strong interest in low-level systems programming,
-            Unix/Linux internals, and database design. I am always eager to learn new technologies and methodologies
-            that can help me grow as a software engineer and make meaningful contributions to the field.
-          </p>
+    <main className="relative min-h-screen px-6 pt-28 sm:pt-36 pb-24">
+      <div className="relative z-10 mx-auto max-w-4xl space-y-12">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#6E6E73] hover:text-[#1D1D1F] transition-colors"
+        >
+          <ArrowLeft size={13} /> Back to overview
+        </Link>
+
+        {/* Profile Card */}
+        <div className="apple-card p-6 sm:p-8 bg-white border border-black/[0.08]">
+          <div className="flex flex-col sm:flex-row items-start gap-6">
+            <div className="relative h-28 w-28 sm:h-32 sm:w-32 shrink-0 rounded-2xl overflow-hidden border border-black/[0.08] shadow-sm">
+              <Image
+                src="/headshot.jpg"
+                alt="Michael Murphy"
+                fill
+                className="object-cover object-top"
+                priority
+              />
+            </div>
+
+            <div className="flex-1 space-y-3">
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#F5F5F7] border border-black/[0.04] text-[11px] font-medium text-[#424245] mb-2">
+                  <span>Villanova University</span>
+                  <span>·</span>
+                  <span>VP Software Development Club</span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1D1D1F]">
+                  Michael Murphy
+                </h1>
+              </div>
+
+              <p className="text-sm text-[#424245] leading-relaxed">
+                Computer Science major at Villanova University. I specialize in native iOS development (Swift/SwiftUI),
+                full-stack web architecture (React 19/Next.js/Postgres), and low-level C programming on Unix/Linux systems.
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3 pt-1 text-xs text-[#6E6E73]">
+                <span className="flex items-center gap-1.5">
+                  <MapPin size={13} className="text-[#0071E3]" /> Philadelphia / New York
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <GraduationCap size={13} className="text-[#0071E3]" /> Class of 2027
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Experience Section */}
-        <div className="mb-20">
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold tracking-tight text-white mb-2">Experience</h2>
-            <p className="text-zinc-500 font-medium">Professional work and research background.</p>
-          </div>
+        {/* Experience */}
+        <section className="space-y-4">
+          <h2 className="text-lg font-bold tracking-tight text-[#1D1D1F] border-b border-black/[0.06] pb-2">
+            Experience & Education
+          </h2>
 
-          <div className="relative border-l-2 border-white/10 pl-6 sm:pl-8 ml-4 sm:ml-0 space-y-12">
-            {experiences.map((exp, index) => (
-              <div key={index} className="relative">
-                {/* Timeline dot */}
-                <div className="absolute -left-[35px] sm:-left-[43px] top-1.5 h-6 w-6 rounded-full bg-[#000814] border-4 border-[#13B5EA] shadow-[0_0_15px_rgba(19,181,234,0.4)]" />
-
-                <div className="glass-panel p-6 sm:p-8 rounded-2xl shadow-lg border border-white/10 hover:border-white/20 transition-all group">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 border-b border-white/5 pb-4">
-                    <div>
-                      <h3 className="text-xl font-bold text-white group-hover:text-[#13B5EA] transition-colors">{exp.role}</h3>
-                      <p className="text-sm font-semibold text-zinc-400 flex items-center gap-2 mt-1">
-                        <Briefcase size={14} className="text-[#13B5EA]" />
-                        {exp.company}
-                      </p>
-                    </div>
-                    <span className="text-xs font-bold text-[#13B5EA] bg-[#13B5EA]/10 border border-[#13B5EA]/20 px-3 py-1.5 rounded-full select-none w-fit">
-                      {exp.date}
+          <div className="space-y-3">
+            {EXPERIENCES.map((exp, idx) => (
+              <div
+                key={idx}
+                className="apple-card p-5 bg-white border border-black/[0.08]"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-sm font-bold text-[#1D1D1F]">
+                      {exp.role}
+                    </h3>
+                    <span className="text-[10px] uppercase font-semibold text-[#6E6E73] bg-[#F5F5F7] px-2 py-0.5 rounded-full">
+                      {exp.badge}
                     </span>
                   </div>
-                  <ul className="space-y-3">
-                    {exp.bullets.map((bullet, i) => (
-                      <li key={i} className="text-zinc-300 text-sm font-medium leading-relaxed flex items-start gap-3">
-                        <span className="text-zinc-600 font-black relative top-0.5 mt-px">•</span>
-                        <span>{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <span className="text-xs font-medium text-[#86868B]">
+                    {exp.period}
+                  </span>
+                </div>
+                <p className="text-xs font-semibold text-[#0071E3] mb-2">
+                  {exp.organization} · {exp.location}
+                </p>
+                <p className="text-xs text-[#424245] leading-relaxed mb-3">
+                  {exp.description}
+                </p>
+                <div className="space-y-1">
+                  {exp.bullets.map((b, i) => (
+                    <div key={i} className="flex items-start gap-2 text-xs text-[#6E6E73]">
+                      <CheckCircle2 size={12} className="text-[#0071E3] shrink-0 mt-0.5" />
+                      <span>{b}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent mb-20" />
+        {/* Competencies */}
+        <section className="space-y-4">
+          <h2 className="text-lg font-bold tracking-tight text-[#1D1D1F] border-b border-black/[0.06] pb-2">
+            Core Competencies
+          </h2>
 
-        {/* Interests Section */}
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold tracking-tight text-white mb-2">Areas of Interest</h2>
-          <p className="text-zinc-500 font-medium">Core competencies and academic focuses.</p>
-        </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-          {interests.map(({ label, color, border, bg, items }) => (
-            <div
-              key={label}
-              className={`glass-panel rounded-2xl border transition-all hover:-translate-y-1 hover:shadow-lg ${border} ${bg} p-8`}
-            >
-              <h2 className={`text-lg font-bold tracking-tight mb-6 ${color}`}>
-                {label}
-              </h2>
-              <ul className="space-y-3">
-                {items.map((item) => (
-                  <li key={item} className="text-sm font-semibold text-zinc-300 flex items-start gap-2">
-                    <span className={`mt-0.5 ${color}`}>•</span>
-                    <span className="leading-snug">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </main>
-
-      <Footer />
-    </div>
-  )
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {SKILL_PILLARS.map((p) => (
+              <div key={p.title} className="apple-card p-5 bg-white border border-black/[0.08]">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[#6E6E73] mb-3">
+                  {p.title}
+                </h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {p.skills.map((s) => (
+                    <span
+                      key={s}
+                      className="px-2.5 py-1 text-xs font-medium bg-[#F5F5F7] border border-black/[0.04] rounded-full text-[#1D1D1F]"
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </main>
+  );
 }

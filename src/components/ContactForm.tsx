@@ -1,7 +1,7 @@
 'use client';
+
 import { useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
-import { Send, CheckCircle, Loader2 } from 'lucide-react';
+import { Send, CheckCircle2, Loader2 } from 'lucide-react';
 
 export function ContactForm() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -10,74 +10,106 @@ export function ContactForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setStatus('loading');
-    const supabase = createClient();
-    const { error } = await supabase
-      .from('contact_submissions')
-      .insert([form]);
 
-    if (error) setStatus('error');
-    else setStatus('success');
+    try {
+      const subject = encodeURIComponent(`Inquiry from ${form.name}`);
+      const body = encodeURIComponent(
+        `Hi Michael,\n\n${form.message}\n\nFrom: ${form.name} (${form.email})`
+      );
+      
+      window.location.href = `mailto:mmurph104@villanova.edu?subject=${subject}&body=${body}`;
+      
+      setTimeout(() => {
+        setStatus('success');
+      }, 500);
+    } catch {
+      setStatus('success');
+    }
   }
 
   if (status === 'success') {
     return (
-      <div className="glass-panel flex flex-col items-center gap-6 rounded-2xl p-16 text-center shadow-xl shadow-[#003366]/20">
-        <div className="h-16 w-16 rounded-full bg-[#13B5EA]/20 flex items-center justify-center shadow-inner">
-          <CheckCircle size={32} className="text-[#13B5EA]" />
+      <div className="apple-card flex flex-col items-center gap-4 p-8 text-center bg-white border border-black/[0.08]">
+        <div className="h-12 w-12 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
+          <CheckCircle2 size={24} />
         </div>
-        <div className="space-y-2">
-          <h3 className="text-2xl font-bold tracking-tighter text-white">Message Sent</h3>
-          <p className="text-base text-zinc-400">I will get back to you as soon as possible.</p>
+        <div className="space-y-1">
+          <h3 className="text-base font-bold text-[#1D1D1F]">
+            Message Prepared
+          </h3>
+          <p className="text-xs text-[#6E6E73] max-w-sm">
+            Mail client opened. You can also write directly to{' '}
+            <span className="text-[#1D1D1F] font-semibold">mmurph104@villanova.edu</span>.
+          </p>
         </div>
-        <button onClick={() => setStatus('idle')} className="mt-6 text-sm font-semibold text-[#13B5EA] hover:text-white transition-colors bg-white/5 px-6 py-2 rounded-full border border-white/10">
-          Send another message
+        <button
+          onClick={() => {
+            setForm({ name: '', email: '', message: '' });
+            setStatus('idle');
+          }}
+          className="mt-2 apple-button-secondary px-5 py-1.5 text-xs font-semibold"
+        >
+          Send another
         </button>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="glass-panel flex flex-col gap-6 rounded-2xl p-10 shadow-xl shadow-[#003366]/10">
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-        <div className="space-y-2">
-          <label className="text-sm font-semibold text-zinc-300 ml-1">Name</label>
+    <form
+      onSubmit={handleSubmit}
+      className="apple-card flex flex-col gap-4 p-6 sm:p-7 bg-white border border-black/[0.08]"
+    >
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <div className="space-y-1.5">
+          <label className="text-xs font-semibold text-[#1D1D1F]">Name</label>
           <input
             required
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
-            className="w-full rounded-2xl border border-white/10 bg-black/20 px-5 py-4 text-base text-white outline-none focus:border-[#13B5EA]/60 focus:bg-white/5 transition-all shadow-inner placeholder:text-zinc-600"
-            placeholder="Michael Murphy"
+            className="w-full rounded-xl border border-black/[0.08] bg-[#F5F5F7] px-3.5 py-2.5 text-xs text-[#1D1D1F] placeholder-[#86868B] outline-none focus:border-[#0071E3] focus:bg-white transition-all"
+            placeholder="Your Name"
           />
         </div>
-        <div className="space-y-2">
-          <label className="text-sm font-semibold text-zinc-300 ml-1">Email</label>
+        <div className="space-y-1.5">
+          <label className="text-xs font-semibold text-[#1D1D1F]">Email</label>
           <input
             required
             type="email"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
-            className="w-full rounded-2xl border border-white/10 bg-black/20 px-5 py-4 text-base text-white outline-none focus:border-[#13B5EA]/60 focus:bg-white/5 transition-all shadow-inner placeholder:text-zinc-600"
-            placeholder="murphy@example.com"
+            className="w-full rounded-xl border border-black/[0.08] bg-[#F5F5F7] px-3.5 py-2.5 text-xs text-[#1D1D1F] placeholder-[#86868B] outline-none focus:border-[#0071E3] focus:bg-white transition-all"
+            placeholder="you@example.com"
           />
         </div>
       </div>
-      <div className="space-y-2">
-        <label className="text-sm font-semibold text-zinc-300 ml-1">Message</label>
+
+      <div className="space-y-1.5">
+        <label className="text-xs font-semibold text-[#1D1D1F]">Message</label>
         <textarea
           required
-          rows={5}
+          rows={4}
           value={form.message}
           onChange={(e) => setForm({ ...form, message: e.target.value })}
-          className="w-full resize-none rounded-2xl border border-white/10 bg-black/20 px-5 py-4 text-base text-white outline-none focus:border-[#13B5EA]/60 focus:bg-white/5 transition-all shadow-inner placeholder:text-zinc-600"
-          placeholder="What are we building?"
+          className="w-full resize-none rounded-xl border border-black/[0.08] bg-[#F5F5F7] px-3.5 py-2.5 text-xs text-[#1D1D1F] placeholder-[#86868B] outline-none focus:border-[#0071E3] focus:bg-white transition-all"
+          placeholder="What would you like to discuss?"
         />
       </div>
+
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="group flex h-14 items-center justify-center gap-3 rounded-full bg-white px-8 font-bold text-[#000814] transition-all hover:bg-zinc-200 disabled:opacity-50 hover:scale-[1.02] active:scale-[0.98] shadow-lg mt-2"
+        className="apple-button-primary h-10 px-6 text-xs font-semibold self-start"
       >
-        {status === 'loading' ? <Loader2 className="animate-spin" size={20} /> : <>Send Message <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" /></>}
+        {status === 'loading' ? (
+          <>
+            <Loader2 className="animate-spin" size={14} /> Opening...
+          </>
+        ) : (
+          <>
+            Send Message <Send size={13} />
+          </>
+        )}
       </button>
     </form>
   );
