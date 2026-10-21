@@ -68,7 +68,7 @@ export default async function HomePage() {
           <div className="flex flex-col sm:flex-row items-start gap-6">
             <div className="relative h-28 w-28 sm:h-32 sm:w-32 shrink-0 rounded-2xl overflow-hidden border border-black/[0.08] shadow-sm">
               <Image
-                src="/headshot.jpg"
+                src="/Headshot.jpg"
                 alt="Michael Murphy"
                 fill
                 className="object-cover object-top"
